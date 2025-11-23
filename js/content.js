@@ -135,20 +135,20 @@ export async function fetchLeaderboard() {
                 user[1]["packs"].push(pack);
             }
         }
-        // for (let pack of user[1]["packs"]) {
-        //     const packLevelScores = [];
-        //     const allUserLevels = [
-        //         ...user[1]["verified"],
-        //         ...user[1]["completed"],
-        //     ];
-        //     for (let level of pack["levels"]) {
-        //         let userLevel = allUserLevels.find((lvl) => lvl.path == level);
-        //         packLevelScores.push(userLevel.score);
-        //     }
-        //     let packScore = 0;
-        //     packLevelScores.forEach((score) => (packScore += score));
-        //     packScore = packScore * 1.5;
-        // }
+        for (let pack of user[1]["packs"]) {
+             const packLevelScores = [];
+             const allUserLevels = [
+                 ...user[1]["verified"],
+                 ...user[1]["completed"],
+             ];
+             for (let level of pack["levels"]) {
+                 let userLevel = allUserLevels.find((lvl) => lvl.path == level);
+                 packLevelScores.push(userLevel.score);
+             }
+             let packScore = 0;
+             packLevelScores.forEach((score) => (packScore += score));
+             packScore = packScore * 1.5;
+         }
     }
 
     // Wrap in extra Object containing the user and total score

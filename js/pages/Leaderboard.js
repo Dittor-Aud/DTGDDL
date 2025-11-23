@@ -26,39 +26,31 @@ export default {
                         Leaderboard may be incorrect, as the following levels could not be loaded: {{ err.join(', ') }}
                     </p>
                 </div>
-                <!-- Leaderboard table -->
-<div class="board-container">
-  <table class="board">
-    <tr v-for="(ientry, i) in leaderboard" :key="i">
-      <!-- only render row content if ientry exists -->
-      <template v-if="ientry">
-        <td class="rank">
-          <p v-if="i + 1 === 1" class="type-label-lg top1">#{{ i + 1 }}</p>
-          <p v-else-if="i + 1 === 2" class="type-label-lg top2">#{{ i + 1 }}</p>
-          <p v-else-if="i + 1 === 3" class="type-label-lg top3">#{{ i + 1 }}</p>
-          <p v-else-if="ientry.total > 0" class="type-label-lg">#{{ i + 1 }}</p>
-          <p v-else class="legacy type-label-lg">#{{ i + 1 }}</p>
-        </td>
-
-        <td class="user" :class="{ 'active': selected === i }">
-          <button @click="selected = i" type="button" class="player-btn">
-            <span class="type-label-lg">{{ ientry.user }}</span>
-          </button>
-        </td>
-
-        <td class="score">
-          <p v-if="ientry.total > 0" class="type-label-lg">{{ localize(ientry.total) }}</p>
-          <p v-else class="legacy type-label-lg">{{ localize(ientry.total) }}</p>
-        </td>
-      </template>
-    </tr>
-  </table>
-</div>
-
-<div class="player-container">
-  <div class="player">
-    <h1>{{ entry.user }}</h1>
-    <p>#{{ selected + 1 }}</p>
+                <div class="board-container">
+                    <table class="board">
+                        <tr v-for="(ientry, i) in leaderboard">
+                            <td class="rank">
+                            <p v-if="i + 1 === 1" class="type-label-lg" class="top1">#{{ i + 1 }}</p>
+                                <p v-else-if="i + 1 === 2" class="type-label-lg" class="top2">#{{ i + 1 }}</p>
+                                <p v-else-if="i + 1 === 3" class="type-label-lg" class="top3">#{{ i + 1 }}</p>
+                                <p v-else-if="ientry.total > 0" class="type-label-lg">#{{ i + 1 }}</p>
+                                <p v-else class="legacy" class="type-label-lg">#{{ i + 1 }}</p>
+                            </td>
+                            <td class="user" :class="{ 'active': selected == i }">
+                                <button @click="selected = i">
+                                <span class="type-label-lg">{{ ientry.user }}</span>
+                                </button>
+                            </td>
+                            <td class="score">
+                            <p v-if="ientry.total > 0" class="type-label-lg">{{ localize(ientry.total) }}</p>
+                            <p v-else class="legacy" class="type-label-lg">{{ localize(ientry.total) }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="player-container">
+                    <div class="player">
+                        <h1>{{ entry.user }}</h1><p>#{{ selected + 1 }}</p>
                         <h3 v-if="entry.total > 0"><b>{{ localize(entry.total) }}</b></h3>
                         <p>Pack Bonus: {{ entry.packBonus }}</p>
                         <div class="packs" v-if="entry.packs.length > 0">
